@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, redirect, flash, url_for, session, request
 from gogglekaap.forms.auth_form import LoginForm, RegisterForm
+from gogglekaap.models.user import User as UserModel
 from werkzeug import security
 
 NAME = "auth"
@@ -26,7 +27,6 @@ USERS.append(User("awesome", "AWESOME", security.generate_password_hash("1234"))
 USERS.append(User("admin", "ADMIN", security.generate_password_hash("1234")))
 USERS.append(User("tester", "TESTER", security.generate_password_hash("1234")))
 
-print(USERS)
 
 @bp.route("/")
 def index():
@@ -85,7 +85,6 @@ def register():
                 )
             )
             session["user_id"] = user_id
-            print(USERS)
             return redirect(url_for("base.index"))
     else:
         flash_form_errors(form)
