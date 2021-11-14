@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, g
 from flask import render_template
 from flask_wtf.csrf import CSRFProtect
 from flask_sqlalchemy import SQLAlchemy
@@ -34,6 +34,17 @@ def create_app():
 
     ''' CSRF INIT '''
     csrf.init_app(app)
+
+
+    ''' REQUEST HOOK '''
+    @app.before_request
+    def before_request():
+        g.db = db.session   # 내 요청 전에 db.session을 물려주고
+
+    @app.teardown_request
+    def teardown_request(exception):
+        if hasattr(g, "db"):
+            g.db.close()    # 요청이 끝날 때는 db.session을 닫아주는
 
     @app.errorhandler(404)
     def page_404(error):
