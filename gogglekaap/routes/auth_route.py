@@ -54,7 +54,7 @@ def register():
             flash("User ID is already exists.")
             return redirect(request.path) # /register path 와 같음
         else:
-            g.db.session.add(
+            g.db.add(
                 UserModel(
                     user_id = user_id,
                     user_name = user_name,
