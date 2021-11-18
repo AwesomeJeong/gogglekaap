@@ -34,11 +34,11 @@ post_parser.add_argument("standard_1", required=False, help="규격1")
 post_parser.add_argument("standard_2", required=False, help="규격2")
 post_parser.add_argument("standard_3", required=False, help="규격3")
 post_parser.add_argument("unit", required=False, help="단위")
-post_parser.add_argument("purchase_price", required=False, help="구매단가")
-post_parser.add_argument("selling_price", required=False, help="판매단가")
-post_parser.add_argument("isMngmnt", required=False, help="재고관리여부")
+post_parser.add_argument("purchase_price",type=int, required=False, help="구매단가")
+post_parser.add_argument("selling_price", type=int, required=False, help="판매단가")
+post_parser.add_argument("isMngmnt", type=bool, required=False, help="재고관리여부")
 post_parser.add_argument("note", required=False, help="기타 관리사항")
-post_parser.add_argument("sort_order", required=False, help="정렬순서")
+post_parser.add_argument("sort_order", type=int, required=False, help="정렬순서")
 post_parser.add_argument("created_by", required=False, help="최초등록자")
 
 # /api/item
@@ -55,10 +55,11 @@ class Itemlist(Resource):
     def post(self):
         ''' 아이템 생성 '''
         args = post_parser.parse_args()
-        item = ItemModel(
-            code = args["code"],
-            item_name = args["item_name"]
-        )
+        print(args)
+        item = ItemModel()
+        for key, value in args.items():
+            setattr(item, key, value)
+            
         g.db.add(item)
         g.db.commit()
         return item, 201
