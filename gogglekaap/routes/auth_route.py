@@ -11,7 +11,7 @@ def before_app_request():
     g.user = None
     user_id = session.get("user_id")
     if user_id:
-        user = UserModel.fine_one_by_user_id(user_id)
+        user = UserModel.find_one_by_user_id(user_id)
         if user:
             g.user = user
         else:

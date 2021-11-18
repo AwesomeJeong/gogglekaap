@@ -8,5 +8,5 @@ class User(db.Model):
 
 
     @classmethod
-    def fine_one_by_user_id(cls, user_id):
+    def find_one_by_user_id(cls, user_id):
         return User.query.filter_by(user_id=user_id).first()

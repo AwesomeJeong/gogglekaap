@@ -18,8 +18,9 @@ def create_app():
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["SWAGGER_UI_DOC_EXPANSION"] = "list"
 
-    if app.config["DEBUG"]:
+    if app.config["DEBUG"]:     # 개발환경에서는 ~ 
         app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 1
+        app.config["WTF_CSRF_ENABLED"] = False
 
     ''' CSRF INIT '''
     csrf.init_app(app)
