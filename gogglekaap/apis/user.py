@@ -11,7 +11,8 @@ ns = Namespace(
 user = ns.model("user", {
     "id": fields.Integer(required=True, description="유저 고유 번호"),
     "user_id": fields.String(required=True, description="유저 아이디"),
-    "user_name": fields.String(required=True, description="유저 이름")
+    "user_name": fields.String(required=True, description="유저 이름"),
+    "created_at": fields.DateTime(description="가입일자")
     # password 는 화면에 뿌려줄 필요가 없으므로 
 })
 
