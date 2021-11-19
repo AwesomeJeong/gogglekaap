@@ -2,29 +2,33 @@ from flask import g
 from flask_restx import Namespace, Resource, fields, reqparse
 from gogglekaap.models.item import Item as ItemModel
 
+# api/item
+# docs에 표시되는 URL
 ns = Namespace(
-    "Item",
+    "item",
     description="아이텐 관리 API"
 )
 
+# /api/docs  Models 에 표시되는 사항
 item = ns.model("item", {
     "code": fields.String(required=True, description="아이템 코드"),
     "cetegory": fields.String(required=True, description="카테고리"),
     "item_name": fields.String(required=True, description="명칭"),
     "texture": fields.String(required=True, description="재질"),
     "standard_1": fields.String(required=True, description="규격1"),
-    "standard_2": fields.String(required=True, description="규격2"),
-    "standard_3": fields.String(required=True, description="규격3"),
+    "standard_2": fields.String(required=False, description="규격2"),
+    "standard_3": fields.String(required=False, description="규격3"),
     "unit": fields.String(required=True, description="단위"),
     "purchase_price": fields.Integer(required=True, description="구매단가"),
     "selling_price": fields.Integer(required=True, description="판매단가"),
     "isMngmnt": fields.Boolean(required=True, description="재고관리여부"),
     "note": fields.String(required=True, description="기타 관리사항"),
-    "sort_order": fields.String(required=True, description="정렬순서"),
+    "sort_order": fields.Integer(required=True, description="정렬순서"),
     "created_by": fields.String(required=True, description="최초등록자"),
     "created_at": fields.String(description="최초등록일자")
 })
 
+# /api/docs/ 에서 item-POST 항목을 통해 create하는 부분
 post_parser = reqparse.RequestParser()
 post_parser.add_argument("code", required=True, help="아이템 코드")
 post_parser.add_argument("category", required=False, help="카테고리")
@@ -59,7 +63,7 @@ class Itemlist(Resource):
         item = ItemModel()
         for key, value in args.items():
             setattr(item, key, value)
-            
+
         g.db.add(item)
         g.db.commit()
         return item, 201

@@ -2,6 +2,8 @@ from gogglekaap import db
 from sqlalchemy import func
 
 class Item(db.Model):
+    # DB 생성하는 부분
+    # null에 대한 설정도 여기서 
     code = db.Column(db.String(20), primary_key=True)
     category = db.Column(db.String(20), nullable=True)
     item_name = db.Column(db.String(20), nullable=False)
