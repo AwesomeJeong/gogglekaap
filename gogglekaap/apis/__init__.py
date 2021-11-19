@@ -2,6 +2,7 @@ from flask_restx import Api
 from flask import Blueprint
 from .user import ns as UserNamespace
 from .item import ns as ItemNamespace
+from .parter import ns as PartnerNamespace
 
 
 blueprint = Blueprint(
@@ -22,3 +23,4 @@ api = Api(
 # TODO: add namespace to Blueprint
 api.add_namespace(UserNamespace)
 api.add_namespace(ItemNamespace)
+api.add_namespace(PartnerNamespace)

@@ -5,6 +5,7 @@ class Config:
     SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:password@localhost/gogglekaap?charset=utf8"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SWAGGER_UI_DOC_EXPANSION = "list"
+    JSON_AS_ASCII = False
 
 
 class DevelopmentConfig(Config):

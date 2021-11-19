@@ -9,7 +9,8 @@ ns = Namespace(
     description="아이텐 관리 API"
 )
 
-# /api/docs  Models 에 표시되는 사항
+# /api/docs  item-GET 항목을 통해서 조회되는 부분
+# Models 에 표시되는 사항
 item = ns.model("item", {
     "code": fields.String(required=True, description="아이템 코드"),
     "cetegory": fields.String(required=True, description="카테고리"),
@@ -59,7 +60,6 @@ class Itemlist(Resource):
     def post(self):
         ''' 아이템 생성 '''
         args = post_parser.parse_args()
-        print(args)
         item = ItemModel()
         for key, value in args.items():
             setattr(item, key, value)
