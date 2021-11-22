@@ -28,7 +28,7 @@ def login():
     if form.validate_on_submit():
         user_id = form.data.get("user_id")
         password = form.data.get("password")
-        user = UserModel.fine_one_by_user_id(user_id)
+        user = UserModel.find_one_by_user_id(user_id)
         if user:
             if not security.check_password_hash(user.password, password):
                 flash("Password is not valid.")
@@ -49,7 +49,7 @@ def register():
         user_name = form.data.get("user_name")
         password = form.data.get("password")
         repassword = form.data.get("repassword")
-        user = UserModel.fine_one_by_user_id(user_id)
+        user = UserModel.find_one_by_user_id(user_id)
         if user:
             flash("User ID is already exists.")
             return redirect(request.path) # /register path 와 같음
