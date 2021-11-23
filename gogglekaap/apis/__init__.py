@@ -1,6 +1,7 @@
 from flask_restx import Api
 from flask import Blueprint, g, abort
 from .user import ns as UserNamespace
+from .memo import ns as MemoNamespace
 from .item import ns as ItemNamespace
 from .parter import ns as PartnerNamespace
 from functools import wraps
@@ -32,5 +33,6 @@ api = Api(
 
 # TODO: add namespace to Blueprint
 api.add_namespace(UserNamespace)
+api.add_namespace(MemoNamespace)
 api.add_namespace(ItemNamespace)
 api.add_namespace(PartnerNamespace)
