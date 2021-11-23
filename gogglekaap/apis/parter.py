@@ -3,7 +3,7 @@ from flask_restx import Namespace, Resource, fields, reqparse
 from gogglekaap.models.partner import Partner as PartnerModel
 
 ns = Namespace(
-    "partner",
+    "partners",
     description="거래처 API"
 )
 '''

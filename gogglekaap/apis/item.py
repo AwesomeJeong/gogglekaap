@@ -5,7 +5,7 @@ from gogglekaap.models.item import Item as ItemModel
 # api/item
 # docs에 표시되는 URL
 ns = Namespace(
-    "item",
+    "items",
     description="아이텐 관리 API"
 )
 
